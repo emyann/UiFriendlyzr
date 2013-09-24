@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type='text/javascript' src='//code.jquery.com/jquery-1.9.1.js'></script>
+<script type='text/javascript' src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
+
+      <script type='text/javascript' src="jquery.qtip.custom/jquery.qtip.js"></script>
+       <link rel="stylesheet" type="text/css" href="jquery.qtip.custom/jquery.qtip.css">
+
+	 <script type='text/javascript' src="script.js"></script>
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/flat-ui/1.1/css/bootstrap.css">
+            <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+	  <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+ 
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/flat-ui/1.1/css/flat-ui.css">
+	  
+      <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+	
+	<div class="navbar-inner">
+		
+		<div class="container">
+			
+			<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+				<i class="icon-cog"></i>
+			</a>
+			
+			<a href="./index.html" class="brand">
+				Compagnon didactique <sup>1.0</sup>
+			</a>		
+			
+		</div> <!-- /container -->
+		
+	</div> <!-- /navbar-inner -->
+	
+</div>
+<div class="container">
+<div class="row">
+
+<div class="span6">
+
+	<div class="widget stacked">					
+				<div class="widget-header">
+					<i class="icon-bookmark"></i>
+					<h3>Quick Shortcuts</h3>
+				</div> <!-- /widget-header -->
+				
+				<div class="widget-content">
+					
+					<div class="shortcuts">
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-list-alt"></i>
+							<span class="shortcut-label">Apps</span>
+						</a>
+						
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-bookmark"></i>
+							<span class="shortcut-label">Bookmarks</span>								
+						</a>
+						
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-signal"></i>
+							<span class="shortcut-label">Reports</span>	
+						</a>
+						
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-comment"></i>
+							<span class="shortcut-label">Comments</span>								
+						</a>
+						
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-user"></i>
+							<span class="shortcut-label">Users</span>
+						</a>
+						
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-file"></i>
+							<span class="shortcut-label">Notes</span>	
+						</a>
+						
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-picture"></i>
+							<span class="shortcut-label">Photos</span>	
+						</a>
+						
+						<a class="shortcut" href="javascript:;">
+							<i class="shortcut-icon icon-tag"></i>
+							<span class="shortcut-label">Tags</span>
+						</a>				
+					</div> <!-- /shortcuts -->	
+				
+				</div> <!-- /widget-content -->
+				
+			</div>
+			</div>
+<div class="span6">
+    <div id="console-settings" class="span3"> <i id="settings" class="icon-circle icon-2x">REC</i>  <i id="play" class="icon-play icon-2x"></i>   
+        <div id="tooltip-form">
+            <label>contenu du tooltip</label>
+            <textarea></textarea>
+            <button class="validate">Valider</button>
+        </div>
+        <button id="reset-timeline">Réinitialiser la Timeline</button>
+        <button id="log-timeline">Détails de la Timeline</button>
+        
+    </div>
+</div>
+</div>
+<div class="row">
+<div id="console-result"></div>
+</div>
+
+</body>
+
+</html>
+
+
