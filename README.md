@@ -12,7 +12,7 @@ I need to do some work on the demo but if you want to test it, follow theses ins
 - Select another block, do the same as previous and so on
 - At the end click again on REC button
 - Now let's click on play and hover block to display tooltip
-- Refresh the page and tooltip are always here !!
+- Refresh the page, press play and tooltip are always here !!
 
 Blocks' reference are saved using a footprint generation, so you can move blocks to another location without tooltips disappear.
 
