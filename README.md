@@ -14,7 +14,7 @@ I need to do some work on the demo but if you want to test it, follow theses ins
 - Now let's click on play and hover block to display tooltip
 - Refresh the page, press play and tooltip are always here !!
 
-Blocks' reference are saved using a generated fingerprint , so you can move blocks to another location without tooltips disappear.
+Blocks' reference are saved using a generated hash , so you can move blocks to another location without tooltips disappear.
 
 Stay tuned, I'll will bring lot of features.
 
