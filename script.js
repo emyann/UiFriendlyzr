@@ -3,18 +3,17 @@ $(document).ready(function(){
 var currentState = "normal";
 var $console = $("#console-result");
 var $scope = $(".container").find(".span6").first();
-console.log($scope);
 var curHash = "";
 
 
 $("body").on("click", function (event) {
    
     //timeline.push(event.target);
-    if (Manager.getMode() === "edit" && ($scope.find($(event.target)).length)) { // en mode édition et si on cliqué dans la zone d'édition
+    if (Manager.getMode() === "edit" && ($scope.find($(event.target)).length)) { // en mode ï¿½dition et si on cliquï¿½ dans la zone d'ï¿½dition
 
         $scope.find(".selected").not(event.target).removeClass('selected');
         $(event.target).toggleClass("selected");
-        curHash = getElementHash($(event.target), event.target.nodeName); // hash de l'élément cliqué 
+        curHash = getElementHash($(event.target), event.target.nodeName); // hash de l'ï¿½lï¿½ment cliquï¿½ 
 
     }
 
@@ -49,11 +48,11 @@ $("#reset-timeline").on("click",function(){
     $("#play, #log-timeline").css("visibility","hidden");
 });
 $("#log-timeline").on("click",function(){
-     $("#console-result").html("<h2>Détails de la timeline</h2>");
+     $("#console-result").html("<h2>Dï¿½tails de la timeline</h2>");
     $.each(Manager.getTimeline().steps,function(index,step){
          $("#console-result").append("<div class=\"step\"> <h3>Etape "+ parseInt(step.index+1) +"</h3>");
         var $el= getElementByHash(step.hashDomElem);
-        $("#console-result").append("sur un élément de type <strong> "+ $el[0].nodeName +"</strong><br/>");
+        $("#console-result").append("sur un ï¿½lï¿½ment de type <strong> "+ $el[0].nodeName +"</strong><br/>");
         
     });
 });
