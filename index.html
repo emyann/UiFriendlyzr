@@ -1,122 +1,97 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<script type='text/javascript' src='//code.jquery.com/jquery-1.9.1.js'></script>
-<script type='text/javascript' src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
-<script type='text/javascript' src="introjs/intro.js"></script>
-       <link rel="stylesheet" type="text/css" href="introjs/introjs.css">
-
-      <script type='text/javascript' src="jquery.qtip.custom/jquery.qtip.js"></script>
-       <link rel="stylesheet" type="text/css" href="jquery.qtip.custom/jquery.qtip.css">
-
-	 <script type='text/javascript' src="script.js"></script>
-      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/flat-ui/1.1/css/bootstrap.css">
-            <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-
-	  <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
  
-      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/flat-ui/1.1/css/flat-ui.css">
-	  
-      <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="introjs/introjs.css">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">	
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-	
-	<div class="navbar-inner">
-		
-		<div class="container">
-			
-			<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-				<i class="icon-cog"></i>
-			</a>
-			
-			<a href="./index.html" class="brand">
-				Compagnon didactique <sup>1.0</sup>
-			</a>		
-			
-		</div> <!-- /container -->
-		
-	</div> <!-- /navbar-inner -->
-	
-</div>
-<div class="container">
-<div class="row">
+    <div class="navbar navbar-inverse navbar-fixed-top">
 
-<div class="span6">
+        <div class="navbar-inner">
 
-	<div class="widget stacked">					
-				<div class="widget-header">
-					<i class="icon-bookmark"></i>
-					<h3>Quick Shortcuts</h3>
-				</div> <!-- /widget-header -->
-				
-				<div class="widget-content">
-					
-					<div class="shortcuts">
-						
-							<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-list-alt"></i>
-							<span class="shortcut-label">Apps</span>
-						</a>
-						<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-bookmark"></i>
-							<span class="shortcut-label">Bookmarks</span>								
-						</a>
-						
-						<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-signal"></i>
-							<span class="shortcut-label">Reports</span>	
-						</a>
-						
-						<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-comment"></i>
-							<span class="shortcut-label">Comments</span>								
-						</a>
-						
-						<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-user"></i>
-							<span class="shortcut-label">Users</span>
-						</a>
-						
-						<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-file"></i>
-							<span class="shortcut-label">Notes</span>	
-						</a>
-						
-						<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-picture"></i>
-							<span class="shortcut-label">Photos</span>	
-						</a>
-					
-						<a class="shortcut" href="javascript:;">
-							<i class="shortcut-icon icon-tag"></i>
-							<span class="shortcut-label">Tags</span>
-						</a>				
-					</div> <!-- /shortcuts -->	
-				
-				</div> <!-- /widget-content -->
-				
-			</div>
-			</div>
-<div class="span6">
-    <div id="console-settings" class="span3"> <i id="settings" class="icon-circle icon-2x">REC</i>  <i id="play" class="icon-play icon-2x"></i>   
+            <div class="container">
+
+                <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+                    <i class="icon-cog"></i>
+                </a>
+
+                <a href="./index.html" class="brand">
+				Compagnon didactique <sup>1.1</sup>
+			</a>	
+
+            </div>
+            <!-- /container -->
+
+        </div>
+        <!-- /navbar-inner -->
+
+    </div>
+    <div class="container">
+    	<div class="row content">
+          <div class="well">
+              Avec UiFriendlyzr, créez vos scénarios didacticiels pas à pas
+             <button type="button" class="btn btn-primary" id="uiFriendlyzr-btn">Faire un essai</button>
+            
+          </div>
+          <div class="row">
+            <div class="col-lg-8">  
+
+                                <div class="col-lg-4"> Mon deuxième bloc avec un autre <button class="btn btn-success"> Bouton</button></div>
+                                <div class="col-lg-4">  Mon premier bloc avec un <button class="btn btn-primary"> Bouton</button></div>
+                                                <div class="col-lg-4">  Mon premier bloc avec un <button class="btn btn-primary"> Bouton</button></div>
+
+            </div>
+             <div class="col-lg-4 ">
+              <table id="uifriendlyzr-timeline-summary" class="table table-striped">
+              <tr>
+                <th>Etape</th>
+                <th>Type du bloc</th>
+                <th>Hash</th>
+                <th>Description</th>
+              </tr>            
+
+              </table>
+            </div>
+          </div>
+         
+
+      </div>
+       <div class="row">
+        <div id="console-settings" class="col-lg-3"> 
         <div id="tooltip-form">
             <label>contenu du tooltip</label>
             <textarea></textarea>
             <button class="validate">Valider</button>
         </div>
-        <button id="reset-timeline">R�initialiser la Timeline</button>
-        <button id="log-timeline">D�tails de la Timeline</button>
+        <button id="reset-timeline">Réinitialiser la Timeline</button>
+        <button id="log-timeline" style="visibility: visible;">Détails de la Timeline</button>
         
     </div>
-</div>
-</div>
-<div class="row">
-<div id="console-result"></div>
-</div>
+      </div>
+        <div class="row">
 
+            <ul id="contextualNav" class="ferroMenu">
+                <li title="Jouer une séquence"><a class="play" href="javascript:void(0);"><i  class="fa fa-play"></i></a>
+                </li>
+                <li title="Arrêter une séquence"><a class="stop" href="javascript:void(0);"><i  class="fa fa-stop"></i></a>
+                </li>
+                <li title="Enregistrer une séquence"><a class="timeline" href="javascript:void(0);"><i  class="fa fa-clock-o"></i></a>
+                </li>
+                <li title="Options de UiFriendlyzr"><a class="settings" href="javascript:void(0);"><i  class="fa fa-cogs"></i></a>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+    <script type='text/javascript' src='//code.jquery.com/jquery-1.9.1.js'></script>
+    <script type='text/javascript' src="introjs/intro.js"></script>    
+    <script type='text/javascript' src="script.js"></script>
 </body>
 
 </html>
-
-

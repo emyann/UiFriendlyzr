@@ -1,68 +1,115 @@
-$(document).ready(function(){
+(function($){
+    
+    $(function(){       
+      var $scope = $(".content");
+      Manager.init();
 
-var currentState = "normal";
-var $console = $("#console-result");
-var $scope = $(".container").find(".span6").first();
-var curHash = "";
+        $("#contextualNav").ferroMenu({
+                position    : "center-bottom",
+                    delay       : 50,
+                    rotation    : 720,
+                    margin      : 20,
+
+                });
+        var intro = introJs();        
+          intro.setOptions({
+            steps: [
+              {
+                element: document.querySelector('#ferromenu-controller'),
+                intro: "<strong>Organisez votre séquence</strong>",
+                position:"top"
+              },
+
+               {
+                element: document.querySelector(".navbar"),
+                intro: "<strong>Naviguez dans les différents espaces</strong>",
+                position:"bottom"
+              }
+               
+              
+            ],
+              skipLabel:"Passer",
+              doneLabel:"<i class='fa fa-stop '></i>",
+              prevLabel:"<i class='fa fa-step-backward '></i>",
+              nextLabel:"<i class='fa fa-step-forward '></i>"
+
+          });
+
+
+
+         $(document).on("click","#uiFriendlyzr-btn",function(){
+            intro.start();
+
+         });
+          $(document).on("click",".ferroMenu li a.play",function(){
+          Manager.play();
+
+         });
+          $(document).on("click","#reset-timeline", function(){
+              Manager.resetTimeline();
+          });
+           $(document).on("click","#log-timeline", function(){
+
+              $("#uifriendlyzr-timeline-summary tr").has("td").remove();
+              Manager.getTimeline().steps.forEach(function(step,index){
+                 var frags = step.hashDomElem.split(":");
+    
+                  var tag = frags[0];
+                  var hashKey = frags[1];
+                  var hash = parseInt(frags[2]);
+                  $("#uifriendlyzr-timeline-summary").append("<tr><td>"+(index+1)+"</td><td>"
+                                                              +tag+"</td><td>"
+                                                              +hash+"</td><td>"
+                                                              +step.tooltip.content+"</td></tr>");
+              });
+          });
+
+
+         $(document).on("click",".ferroMenu li a.timeline",function(){
+            $.fn.ferroMenu.toggleMenu();
+            
+
+            /** Init Manager **/
+            var prevTarget;
+            Manager.switchMode($scope);
+           
+            $("#console-settings").fadeIn(300);
+            /** Init Manager **/
+
+         });
 
 
 $("body").on("click", function (event) {
    
-    //timeline.push(event.target);
     if (Manager.getMode() === "edit" && ($scope.find($(event.target)).length)) { // en mode �dition et si on cliqu� dans la zone d'�dition
-
-        $scope.find(".selected").not(event.target).removeClass('selected');
-        $(event.target).toggleClass("selected");
+       
         curHash = getElementHash($(event.target), event.target.nodeName); // hash de l'�l�ment cliqu� 
-
+      console.log(curHash);
     }
 
 });
+
 $("#tooltip-form button.validate").on("click", function () {
     var content = $("#tooltip-form textarea").val();
     console.log(content);
     var tooltip = new Tooltip(content, {});
     var step = new Step(0, curHash, tooltip);
     Manager.saveStep(step);
+
+
+    /** Alimentation du tableau récapitulatif **/
+        $("")
+    /** Alimentation du tableau récapitulatif **/
    // console.log(Manager.getTimeline());
    
 });
 
 
-$("#settings").on("click", function (e) {
-   var mode= Manager.switchMode($scope);
-   console.log(mode);
-    if(mode === "normal" || !Manager.timelineIsEmpty){
-        $("#play, #log-timeline").css("visibility","visible");
-    }else{
-         $("#play, #log-timeline").css("visibility","hidden");
-    }
-    
-    
-});
-$("#play").on("click",function(){
-    Manager.play();
-});
-$("#reset-timeline").on("click",function(){
-    Manager.resetTimeline();
-    $("#play, #log-timeline").css("visibility","hidden");
-});
-$("#log-timeline").on("click",function(){
-     $("#console-result").html("<h2>D�tails de la timeline</h2>");
-    $.each(Manager.getTimeline().steps,function(index,step){
-         $("#console-result").append("<div class=\"step\"> <h3>Etape "+ parseInt(step.index+1) +"</h3>");
-        var $el= getElementByHash(step.hashDomElem);
-        $("#console-result").append("sur un �l�ment de type <strong> "+ $el[0].nodeName +"</strong><br/>");
-        
     });
-});
-Manager.init(function(){
-    if (Manager.getTimeline().steps.length !== 0){
-        $("#play , #log-timeline").css("visibility","visible");
-    }
-});
 
-});
+
+
+})(jQuery)
 
 
 var Tooltip = (function () {
@@ -81,8 +128,9 @@ var Step = (function () {
     return Step;
 })();
 var Timeline = (function () {
-    function Timeline(id, steps) {
+    function Timeline(id, steps,scope) {
         this.id = id;
+        this.scope=scope;
         this.steps = steps;
     }
 
@@ -96,12 +144,22 @@ var Manager = (function () {
     var mode = "normal";
     var timeline ={};
     var setUi = function ($scope) {
+
         switch (mode) {
             case "normal":
-                $scope.removeClass("edit-mode");
+                  $scope.removeClass("uifriendlyzr-scope");
+                 $(document).unbind("mousemove");
                 break;
             case "edit":
-                $scope.addClass("edit-mode");
+                $scope.addClass("uifriendlyzr-scope");
+                $(document).mousemove(function(event) {
+              var targetElement=$(document.elementFromPoint(event.pageX,event.pageY));      
+                  if(typeof prevTarget != "undefined" && targetElement[0] !== prevTarget[0]){
+                    targetElement.addClass("focused");
+                    prevTarget.removeClass("focused");                   
+                  }                  
+                   prevTarget=targetElement;
+            });
                 break;
         }
     };
@@ -109,39 +167,33 @@ var Manager = (function () {
             localStorage.setItem("Timeline",JSON.stringify(timeline));
         };
     return {
-        init: function(callback){       
-
-                
+        init: function(){  
             if( localStorage.getItem("Timeline") === null || JSON.parse(localStorage.getItem("Timeline")).length == 0){
-                console.log("ici");
                  timeline= new Timeline(1, []);
 
             }else{
-                console.log("ici");
                 var timelineData=JSON.parse(localStorage.getItem("Timeline"));
                timeline=$.extend({},new Timeline(1,[]),timelineData);
-            }
-            if(callback){
-                callback();
-            }
-            console.log(timeline);           
+            }       
         },
         play:function(){
-             $.each(timeline.steps,function(index,step){
-                console.log(step.tooltip.content);
-                var $el= getElementByHash(step.hashDomElem);
-                console.log($el);
-                $el.qtip({
-                              content:{
-                                    text:step.tooltip.content
-                                },
-                                style: {
-                                    classes: 'qtip-blue qtip-shadow qtip-rounded qtip-tipsy'
-                                } 
-              });
-         
-        
-             });
+          if(timeline.steps.length != 0){
+            var intro = introJs();
+          var allSteps= $.map(timeline.steps,
+                function(item,index){
+                    return {
+                      element:getElementByHash(item.hashDomElem)[0],
+                      intro:item.tooltip.content
+                      };
+                  })  ;
+          intro.setOptions({steps:allSteps ,skipLabel:"Passer",
+              doneLabel:"<i class='fa fa-stop '></i>",
+              prevLabel:"<i class='fa fa-step-backward '></i>",
+              nextLabel:"<i class='fa fa-step-forward '></i>"});
+          intro.start();
+          }
+          
+            
            
         },
         switchMode: function ($scope) {
@@ -168,7 +220,8 @@ var Manager = (function () {
              return timeline.steps.length === 0;
         },
         resetTimeline:function(){
-             localStorage.removeItem("Timeline");
+              timeline.steps=[];
+             localStorage.removeItem("Timeline"); 
         }
      
     };
@@ -210,7 +263,7 @@ function getElementByHash(hashValue) {
         var hashKey = frags[1];
         var hash = parseInt(frags[2]);
 
-        $(".container " + tag).each(function () {
+        $(".content " + tag).each(function () {
             if (hashKey == "H") {
                 if ((getHash($.trim($(this).html())) - hash) == 0) {
                     el = $(this);
